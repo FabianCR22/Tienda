@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
+    
+    <head>
+        <title>Tienda</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    
+    <body>
+
+        <!-- <header th:replace="layout/plantilla :: header" /> -->
+        <h2>Listado de Personas</h2>
+        <a th:href="@{/crear}">Nueva Persona</a>
+        
+        <div th:if="${personas != null and !personas.empty}">
+        
+            <table>
+                
+                <thead>
+                    
+                    <tr>
+                        
+                        <th>Nombre</th>
+                        <th>Apellidos</th>
+                        <th>Correo</th>
+                        <th>Telefono</th>
+                        <th>Pais</th>
+                        <th>Eliminar</th>
+                        <!-- <th>Modificar</th> -->
+                        
+                    </tr>
+                    
+                </thead>
+                
+                <tbody>
+                    
+                    <th:block th:each="user : ${personas}">
+                        
+                        <tr>
+                        
+                            <td th:text="${persona.getNombre}"></td>
+                            <td th:text="${persona.getApellido1}"></td>
+                            <td th:text="${persona.getApellido2}"></td>
+                            <td th:text="${persona.getEmail}"></td>
+                            <td th:text="${persona.getTelefono}"></td>
+                            <td th:text="${persona.getPais}"></td>
+                            <td><a th:href="@{/delete/{id}(id=${user.getId})}">Eliminar</a></td>
+                            <!-- <td><a th:href="@{/modificarPersona/} + ${persona.idPersona}">Modificar</a></td> -->
+                        
+                        </tr>
+                        
+                    </th:block>
+                    
+                    
+                </tbody>
+                
+            </table>
+        
+        </div>
+        
+        
+        <div th:if="${personas == null or personas.empty}">
+        
+            No tenemos lista de clientes que mostrar
+        
+        </div>
+        
+    </body>
+    
+</html>

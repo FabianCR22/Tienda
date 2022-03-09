@@ -7,3 +7,121 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
     Author     : fabia
 */
 
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Serif:wght@100&display=swap');
+
+*{
+    
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto Serif', sans-serif;
+    
+}
+
+header{
+    
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 40px 100px;
+    
+    
+    /* 
+    Nos va a dar profundidad, va a poder mover el elemento hacia atras o hacia adelante.
+    */
+    z-index: 1000;
+    
+    
+    display: flex;
+    
+    
+    /* 
+    Es como justificar los elementos del div // va de la mano con el display: flex;
+    */
+    justify-content: space-between;
+    
+    
+    align-items: center;
+    
+}
+
+header .logo{
+    
+    color: #fff;
+    text-transform: uppercase;
+    cursor: pointer;
+    
+}
+
+
+.content{
+    
+    position: absolute; 
+    right: 0;
+    width: 100%;
+    
+    /* 
+    Interlineado
+    */
+    min-height: 100vh;
+    
+    padding: 100px;
+    
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #cccccc;
+    z-index: 2;
+    
+    
+}
+
+.content video{
+    
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.8;
+    
+    
+}
+
+.social{
+    
+    position: absolute;
+    z-index: 10;
+    bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.social li{
+    
+    list-style: none;
+}
+
+.social li a{
+    
+    list-style: none;
+    display: inline-block;
+    margin-right: 20px;
+    transform: scale(0.5);
+    transition: 0.5s;
+    
+}
+
+
+/* 
+    Hover: solo cuando el mouse pase por ahi.
+    En este caso lo que hace es que unos iconos se hagan un poquito hacia arriba.
+*/
+.social li a:hover{
+    
+    transform: scale(0.5) translateY(-15px);
+    
+}
