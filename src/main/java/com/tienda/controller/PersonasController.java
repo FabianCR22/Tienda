@@ -9,7 +9,9 @@ package com.tienda.controller;
  * @author fabia
  */
 
+import com.tienda.entity.Pais;
 import com.tienda.entity.Persona;
+import com.tienda.service.IPaisService;
 import com.tienda.service.IPersonaService;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
@@ -28,6 +30,9 @@ public class PersonasController {
     @Autowired
     private IPersonaService personaService;
     
+    @Autowired
+    private IPaisService paisService;
+    
     @GetMapping("/personas")
     public String index(Model model){
     
@@ -41,7 +46,9 @@ public class PersonasController {
     @GetMapping("/personasN")
     public String crearPersona(Model model){
     
+        List<Pais> listaPais = paisService.listCountry();
         model.addAttribute("persona", new Persona());
+        model.addAttribute("paises", listaPais);
         
         return "crear";
     
@@ -51,7 +58,7 @@ public class PersonasController {
     public String guardarPersona(@ModelAttribute Persona persona){
     
         personaService.savePerson(persona);
-        return "redirect:/persona";
+        return "redirect:/personas";
         
     }
     
@@ -59,7 +66,7 @@ public class PersonasController {
     public String eliminarPersona(@PathVariable("id") Long id){
     
         personaService.delete(id);
-        return "redirect:/persona";
+        return "redirect:/personas";
     
     }
     

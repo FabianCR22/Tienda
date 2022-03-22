@@ -6,15 +6,13 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns="http://www.w3.org/1999/xhtml">
     
-    <head>
-        <title>Tienda</title>
-        <meta charset="UTF-8"> 
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
+    <head th:replace="plantilla/template::head"></head>
+    
     
     <body>
         
-        <!-- <header th:replace="layout/plantilla :: header" /> -->
+        <header th:replace="plantilla/template::header"></header>
+        
         <h2>Datos de Clientes</h2>
         <a th:href="@{/}">Regresar</a>
         <br>
@@ -45,15 +43,20 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                 <input type="tel" name="telefono" th:field="*{telefono}"/>
                 <br>
                     
-                <label for="pais">Pais:</label>
-                <input type="text" name="pais" th:field="*{pais}"/>
+                <label for="paises">Pais:</label>
+                <select th:field="*{pais}">
+                    <option th:each="x:${paises}"
+                            th:value="${x.id}"
+                            th:text="${x.pais}" />
+                </select>
+
                 <br>
                     
-                <input type="submit" name="guardar" value="Guardar"/>
+                <input type="submit" name="Guardar" value="guardar"/>
                 
             </form>
         
-            <!-- <footer th:replace="layout/plantilla :: footer" /> -->
+            <footer th:replace="plantilla/template::footer"></footer>
             
     </body>
     
