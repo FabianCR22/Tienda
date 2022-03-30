@@ -62,6 +62,18 @@ public class PersonasController {
         
     }
     
+    @GetMapping("/editPersona/ {id}")
+    public String editarPersona(@PathVariable("id") Long idPersona, Model model){
+    
+        Persona persona = personaService.getPersonById(idPersona);
+        List<Pais> listaPais = paisService.listCountry();
+        model.addAttribute("persona", persona);
+        model.addAttribute("paises", listaPais);
+        
+        return "crear";
+    
+    }
+    
     @GetMapping("/delete/{id}")
     public String eliminarPersona(@PathVariable("id") Long id){
     
@@ -70,14 +82,4 @@ public class PersonasController {
     
     }
     
-    /*
-    @GetMapping("/modificarPersona/ {idPersona}")
-    public String modificarPersona(Persona persona, Model model){
-    
-        persona = personaService.find(persona);
-        model.addAttribute("persona", persona);
-        return "modificarPersona";
-        
-    }
-    */
 }
