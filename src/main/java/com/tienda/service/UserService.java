@@ -31,11 +31,9 @@ public class UserService implements UserDetailsService{
     @Override
     public UserDetails loadUserByUsername (String username) throws UsernameNotFoundException{
     
-        Persona p = personaService.findByNombre (username);
-        List <GrantedAuthority> roles = new ArrayList <>();
-        roles.add(new SimpleGrantedAuthority ("ADMIN"));
-        UserDetails userDet = new User (p.getNombre(), p.getApellido1(), roles);
-        return userDet;
+        Persona persona = this.personaService.findByNombre (username);
+        Userprincipal userPrincipal = new Userprincipal(persona);
+        return userPrincipal;
     
     }
     

@@ -62,7 +62,7 @@ public class PersonasController {
         
     }
     
-    @GetMapping("/editPersona/ {id}")
+    @GetMapping("/editPersona/{id}")
     public String editarPersona(@PathVariable("id") Long idPersona, Model model){
     
         Persona persona = personaService.getPersonById(idPersona);

@@ -8,6 +8,7 @@ import com.tienda.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -34,6 +35,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
     
     }
     
+    @Bean
+    DaoAuthenticationProvider authenticationProvider() {
+        DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
+        daoAuthenticationProvider.setPasswordEncoder(passwordEncoder());
+        daoAuthenticationProvider.setUserDetailsService(this.userDetailsService);
+
+        return daoAuthenticationProvider;
+    }
+
+    public SecurityConfig(UserService userPrincipalDetailsService) {
+        this.userDetailsService = userPrincipalDetailsService;
+    }
+    
+    /*
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
     
@@ -51,22 +66,29 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                 .roles("USER");
     
     }
+    */
+    
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) {
+    
+        auth.authenticationProvider(authenticationProvider());
+    
+    }
     
     @Override
     protected void configure(HttpSecurity http) throws Exception{
     
         
-        http.authorizeHttpRequests()
-                .antMatchers("/crear")
+        http.authorizeRequests()
+                .antMatchers("/personas")
                 .hasRole("ADMIN")
                 .antMatchers("/personasN")
                 .hasAnyRole("ADMIN", "VENDEDOR")
-                .antMatchers("/")
+                .antMatchers("/personas", "/personasN")
                 .hasAnyRole("USER", "VENDEDOR", "ADMIN")
                 .and()
                 .formLogin()
-                .and()
-                .exceptionHandling().accessDeniedPage("/errores/403");
+                .loginProcessingUrl("/signin").permitAll();
     
     
     }

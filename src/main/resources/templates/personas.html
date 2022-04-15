@@ -1,19 +1,17 @@
 <!DOCTYPE html>
 
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns="http://www.w3.org/1999/xhtml">
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://thymeleaft.org/extras/spring-security">
     
-    <head>
-        <title>Tienda</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
+    <head th:replace="plantilla/template::head"></head>
     
     <body>
 
-        <!-- <header th:replace="layout/plantilla :: header" /> -->
+        <header th:replace="plantilla/template::header"></header>
+        
         <h2>Listado de Personas</h2>
-        <a th:href="@{/crear}">Nueva Persona</a>
+        <a th:href="@{/personasN}">Nueva Persona</a>
         
         <div th:if="${personas != null and !personas.empty}">
         
@@ -67,6 +65,8 @@
             No tenemos lista de clientes que mostrar
         
         </div>
+        
+        <footer th:replace="plantilla/template::footer"></footer>
         
     </body>
     
